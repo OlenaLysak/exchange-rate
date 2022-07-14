@@ -5,18 +5,18 @@ import styles from './Converter.module.css';
 import classNames from 'classnames/bind';
 
 //Components
-import { TextField, Select, MenuItem } from '@mui/material';
+import { TextField } from '@mui/material';
+import MySelect from '../Select/MySelect';
 
 //Utils
 import { setUpUrl } from '../../utils/dataUtils';
 
 //Constants
-import { REQUEST_OPTIONS } from '../../constants/constants';
+import { REQUEST_OPTIONS, CURRENCY_OPTIONS } from '../../constants/constants';
 
 let cx = classNames.bind(styles);
 
 const Converter = () => {
-  const currencyOptions = ['UAH', 'USD', 'EUR'];
   const [currencyFrom, setCurrencyFrom] = useState('');
   const [currencyTo, setCurrencyTo] = useState('');
   const [amount, setAmount] = useState('');
@@ -68,43 +68,18 @@ const Converter = () => {
           InputProps={{ inputProps: { min: 1 } }}
           onChange={handleAmountChange}
           value={amount}
-          // error
         />
-
-        <Select
-          className={cx({ node: true, select: true })}
-          id="selectFrom"
+        <MySelect
+          options={CURRENCY_OPTIONS}
           value={currencyFrom}
-          onChange={handleCurrencyFromChange}
-          // label="Currency"
-        >
-          <MenuItem value="" disabled>
-            Choose an option
-          </MenuItem>
-          {currencyOptions.map((item, index) => (
-            <MenuItem value={item} key={index}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
-
+          handleChange={handleCurrencyFromChange}
+        />
         <div className={styles.node}>to</div>
-
-        <Select
-          className={cx({ node: true, select: true })}
-          id="selectTo"
+        <MySelect
+          options={CURRENCY_OPTIONS}
           value={currencyTo}
-          onChange={handleCurrencyToChange}
-        >
-          <MenuItem value="" disabled>
-            Choose an option
-          </MenuItem>
-          {currencyOptions.map((item, index) => (
-            <MenuItem value={item} key={index}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
+          handleChange={handleCurrencyToChange}
+        />
       </div>
       {showResult ? <div className={styles.resultBlock}>{result}</div> : null}
     </div>

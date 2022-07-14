@@ -9,4 +9,6 @@ const REQUEST_OPTIONS = {
   headers: myHeaders,
 };
 
-export { API_KEY, REQUEST_OPTIONS };
+const CURRENCY_OPTIONS = ['UAH', 'USD', 'EUR'];
+
+export { API_KEY, REQUEST_OPTIONS, CURRENCY_OPTIONS };
